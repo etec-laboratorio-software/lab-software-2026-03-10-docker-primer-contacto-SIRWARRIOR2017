@@ -37,6 +37,19 @@ Sistema completo de e-commerce para venta de componentes de computadoras con pan
 - **Docker** - [Descargar aquí](https://www.docker.com/get-started)
 - **Docker Compose** (incluido con Docker Desktop)
 
+#### Instalación en Arch Linux
+
+Si usas Arch Linux, instala Docker y Docker Compose con:
+
+```bash
+sudo pacman -S docker docker-compose
+sudo systemctl enable docker
+sudo systemctl start docker
+sudo usermod -aG docker $USER
+```
+
+Cierra sesión y vuelve a iniciar sesión (o ejecuta `newgrp docker`) para aplicar el grupo.
+
 Para verificar la instalación:
 ```bash
 docker --version

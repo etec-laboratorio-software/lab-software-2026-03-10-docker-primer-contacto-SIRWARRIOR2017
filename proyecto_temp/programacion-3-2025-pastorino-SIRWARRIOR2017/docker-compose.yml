@@ -2,7 +2,7 @@ services:
   backend:
     build: ./BACKEND
     volumes:
-      - ./BACKEND/database.sqlite:/app/database.sqlite
+      - ./BACKEND/database:/app/database
       - ./BACKEND/public/uploads:/app/public/uploads
     environment:
       - NODE_ENV=production

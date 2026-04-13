@@ -7,6 +7,9 @@ RUN apk add --no-cache python3 make g++
 # Establecer directorio de trabajo
 WORKDIR /app
 
+# Crear directorio para la base de datos
+RUN mkdir -p /app/database
+
 # Copiar package.json y package-lock.json
 COPY package*.json ./
 
