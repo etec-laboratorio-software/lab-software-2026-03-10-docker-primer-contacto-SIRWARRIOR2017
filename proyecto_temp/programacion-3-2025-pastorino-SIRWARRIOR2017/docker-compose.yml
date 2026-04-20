@@ -1,0 +1,19 @@
+services:
+  backend:
+    build: ./BACKEND
+    volumes:
+      - ./BACKEND/database:/app/database
+      - ./BACKEND/public/uploads:/app/public/uploads
+    environment:
+      - NODE_ENV=production
+      - JWT_SECRET=0c881cb890a1cdb2bc7d1981bb94de80400a850350a24eb5f95636b32b1e0cc024bed561ce3266b0a5317de5d042136949291b244fb729241ae09ab291d0e32b
+      - PORT=3000
+
+  frontend:
+    build: ./FRONTEND
+    ports:
+      - "80:80"
+    environment:
+      - VITE_API_BASE_URL=/api
+    depends_on:
+      - backend
