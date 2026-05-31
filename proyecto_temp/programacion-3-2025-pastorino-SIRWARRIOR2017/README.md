@@ -64,30 +64,89 @@ Ejecuta el siguiente comando en la raíz del proyecto:
 docker compose up --build
 ```
 
+**Esto hará:**
+1. ✅ Compilar la imagen del backend (Node.js + Express)
+2. ✅ Compilar la imagen del frontend (React + Nginx)
+3. ✅ Inicializar la base de datos SQLite
+4. ✅ Ejecutar seeders con datos precargados
+5. ✅ Crear usuario administrador automáticamente
+6. ✅ Exponer la aplicación en el puerto 80
+
 **Salida esperada:**
 ```
 [+] Building ...
 [+] Running ...
-backend-1  | ✅ Conexión a la base de datos exitosa
-backend-1  | 📊 Sincronizando modelos con la base de datos...
-backend-1  | ✅ Modelos sincronizados correctamente.
+backend-1  | ✅ Conexión a la base de datos establecida correctamente.
+backend-1  | 🔄 Inicializando base de datos...
+backend-1  | 🌱 No se encontraron datos. Ejecutando seeder...
+backend-1  | ✅ Seeder completado
+backend-1  | 👤 Creando usuario administrador...
+backend-1  | ✅ Usuario administrador creado: admin@pcstore.com / admin123
 backend-1  | 🚀 Servidor ejecutándose en puerto 3000
 frontend-1 | /docker-entrypoint.sh: Configuration complete; ready for start up
-frontend-1 | 2024/xx/xx xx:xx:xx [notice] 1#1: using the "epoll" event method
 ```
 
 ### Acceder a la Aplicación
 
-Abre tu navegador en: **http://localhost:80**
+Abre tu navegador en: **http://localhost**
 
-El backend no tiene puerto publicado en el host; solo el frontend Nginx expone el puerto 80.
-Todas las peticiones a `/api` son proxyadas internamente al backend en el contenedor.
+#### Credenciales de Acceso
+
+```
+📧 Email: admin@pcstore.com
+🔑 Contraseña: admin123
+```
+
+#### Rutas Disponibles
+
+| Ruta | Descripción |
+|------|-------------|
+| `http://localhost` | Inicio (frontend React) |
+| `http://localhost/login` | Página de login |
+| `http://localhost/products` | Catálogo de productos |
+| `http://localhost/admin` | Dashboard administrativo (requiere login como admin) |
+| `http://localhost/api/*` | API REST (proxy interno al backend) |
+
+### Detalles de la Configuración Docker
+
+#### Contenedores
+
+1. **pc-store-backend** (Node.js)
+   - Puerto interno: 3000 (NO expuesto al host)
+   - Base de datos: SQLite en `/app/database/`
+   - Archivos: Almacenamiento de uploads en `/app/public/uploads/`
+
+2. **pc-store-frontend** (Nginx + React)
+   - Puerto: 80 (expuesto en el host)
+   - Proxy inverso: `/api/` → `backend:3000/api/`
+   - SPA: Redirecciona todas las rutas a `index.html`
+
+#### Red
+
+Ambos contenedores están conectados en una red `pcstore-network` que permite comunicación interna.
 
 ### Detener la Aplicación
 
 Presiona `Ctrl+C` en la terminal o ejecuta:
 ```bash
 docker compose down
+```
+
+Para eliminar también los volúmenes de datos (BD y uploads):
+```bash
+docker compose down -v
+```
+
+### Reiniciar desde Cero
+
+Si necesitas resetear la base de datos:
+
+```bash
+# Detener los contenedores y eliminar volúmenes
+docker compose down -v
+
+# Reiniciar
+docker compose up --build
 ```
 
 ### Desarrollo Local (Opcional)

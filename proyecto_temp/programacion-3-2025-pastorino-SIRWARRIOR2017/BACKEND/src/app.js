@@ -9,6 +9,7 @@ require('dotenv').config();
 const { sequelize, testConnection } = require('./config/database');
 const models = require('./models');
 const logger = require('./utils/logger');
+const { initDatabase } = require('./scripts/init');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -167,10 +168,10 @@ const startServer = async () => {
     // Probar conexión a la base de datos
     await testConnection();
 
-    // Sincronizar modelos con la base de datos
-    logger.info('📊 Sincronizando modelos con la base de datos...');
-    await sequelize.sync({ force: false }); // force: true recrea las tablas
-    logger.info('✅ Modelos sincronizados correctamente.');
+    // Inicializar la base de datos (sincronizar, seedear si es necesario)
+    logger.info('🔄 Inicializando base de datos...');
+    await initDatabase();
+    logger.info('✅ Base de datos inicializada correctamente.');
 
     // Iniciar servidor
     app.listen(PORT, () => {
