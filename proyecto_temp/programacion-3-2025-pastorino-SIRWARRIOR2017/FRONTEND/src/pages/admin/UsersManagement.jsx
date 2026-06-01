@@ -48,8 +48,7 @@ import {
 } from '@mui/icons-material';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-
-const API_BASE_URL = 'http://localhost:3000/api';
+import { API_BASE_URL } from '../../services/api';
 
 const UsersManagement = () => {
   const [users, setUsers] = useState([]);

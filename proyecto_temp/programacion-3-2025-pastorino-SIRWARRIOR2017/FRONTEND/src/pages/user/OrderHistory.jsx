@@ -24,6 +24,7 @@ import {
 import { ChevronDown, ChevronUp, Package, ArrowLeft } from 'lucide-react';
 import toast from 'react-hot-toast';
 import * as api from '../../services/api';
+import { normalizeMediaUrl } from '../../utils/mediaPath';
 
 const statusColors = {
   pending: 'warning',
@@ -128,7 +129,7 @@ const OrderCard = ({ order }) => {
                             component="img"
                             src={
                               item.Product?.images?.[0]
-                                ? `http://localhost:3000${item.Product.images[0]}`
+                                ? normalizeMediaUrl(item.Product.images[0])
                                 : 'https://via.placeholder.com/40?text=Sin+Imagen'
                             }
                             alt={item.Product?.name}

@@ -73,7 +73,7 @@ const PCBuilder = () => {
       setLoading(true);
       const [productsData, categoriesData] = await Promise.all([
         api.getProducts(),
-        fetch('http://localhost:3000/api/categories').then(r => r.json())
+        api.getCategories()
       ]);
 
       console.log('Respuesta de productos:', productsData);
@@ -305,7 +305,7 @@ const PCBuilder = () => {
             <Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
                 <Avatar
-                  src={selected.images?.[0] ? `http://localhost:3000${selected.images[0]}` : ''}
+                  src={selected.images?.[0] ? normalizeMediaUrl(selected.images[0]) : ''}
                   sx={{ width: 50, height: 50 }}
                 />
                 <Box sx={{ flex: 1 }}>
@@ -526,7 +526,7 @@ const PCBuilder = () => {
                 >
                   <ListItemAvatar>
                     <Avatar
-                      src={product.images?.[0] ? `http://localhost:3000${product.images[0]}` : ''}
+                      src={product.images?.[0] ? normalizeMediaUrl(product.images[0]) : ''}
                       variant="rounded"
                       sx={{ width: 60, height: 60 }}
                     />

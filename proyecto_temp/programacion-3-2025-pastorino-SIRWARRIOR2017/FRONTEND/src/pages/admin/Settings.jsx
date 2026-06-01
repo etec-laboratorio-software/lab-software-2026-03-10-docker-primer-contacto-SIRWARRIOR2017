@@ -17,6 +17,7 @@ import {
 import { Save, Upload, Image as ImageIcon, Palette, Mail, Phone, MapPin, Facebook, Instagram, Twitter } from 'lucide-react';
 import toast from 'react-hot-toast';
 import * as api from '../../services/api';
+import { normalizeMediaUrl } from '../../utils/mediaPath';
 import SiteConfigContext from '../../contexts/SiteConfigContext';
 
 const Settings = () => {
@@ -55,7 +56,7 @@ const Settings = () => {
       console.log('Settings loaded:', data);
       setSettings(data);
       if (data.logo) {
-        setLogoPreview(`http://localhost:3000${data.logo}`);
+        setLogoPreview(normalizeMediaUrl(data.logo));
       }
     } catch (err) {
       console.error('Error loading settings:', err);

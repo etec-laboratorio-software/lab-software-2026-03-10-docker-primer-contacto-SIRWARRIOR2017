@@ -13,14 +13,15 @@ import {
   Container,
   Avatar,
   Divider,
-  ListItemIcon
+  ListItemIcon,
 } from '@mui/material';
+import { normalizeMediaUrl } from '../utils/mediaPath';
 import {
   ShoppingCart,
   User,
   LogOut,
   Package,
-  Shield
+  Shield,
 } from 'lucide-react';
 import CartContext from '../contexts/CartContext';
 import AuthContext from '../contexts/AuthContext';
@@ -66,7 +67,7 @@ const Header = () => {
     if (!name) return 'U';
     return name
       .split(' ')
-      .map(word => word[0])
+      .map((word) => word[0])
       .join('')
       .toUpperCase()
       .slice(0, 2);
@@ -75,18 +76,15 @@ const Header = () => {
   return (
     <AppBar
       position="sticky"
-      elevation={scrolled ? 4 : 0}
+      elevation={0}
       sx={{
-        background: scrolled
-          ? 'rgba(255, 255, 255, 0.95)'
-          : 'linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)',
-        backdropFilter: scrolled ? 'blur(10px)' : 'none',
-        transition: 'all 0.3s ease-in-out',
-        borderBottom: scrolled ? '1px solid rgba(0,0,0,0.08)' : 'none',
+        backgroundColor: scrolled ? 'rgba(255,255,255,0.95)' : 'transparent',
+        borderBottom: scrolled ? '1px solid rgba(226,232,240,0.8)' : 'none',
+        transition: 'all 0.3s ease',
       }}
     >
       <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{ minHeight: { xs: 70, md: 80 }, py: 1 }}>
+        <Toolbar disableGutters sx={{ justifyContent: 'space-between', px: { xs: 2, md: 0 } }}>
           {/* Logo */}
           <Box
             component={Link}
@@ -103,7 +101,7 @@ const Header = () => {
             {config.logo && (
               <Box
                 component="img"
-                src={`http://localhost:3000${config.logo}`}
+                src={normalizeMediaUrl(config.logo)}
                 alt={config.siteName}
                 sx={{
                   height: scrolled ? 50 : 70,
@@ -197,7 +195,6 @@ const Header = () => {
 
           {/* Right Side Actions */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            {/* Cart */}
             <IconButton
               component={Link}
               to="/cart"
@@ -213,7 +210,6 @@ const Header = () => {
               </Badge>
             </IconButton>
 
-            {/* User Menu */}
             {isAuthenticated ? (
               <>
                 <IconButton

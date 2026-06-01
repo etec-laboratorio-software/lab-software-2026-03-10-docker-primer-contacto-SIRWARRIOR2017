@@ -26,6 +26,7 @@ import { Plus, Minus, Trash2, ShoppingBag, ArrowLeft, AlertTriangle } from 'luci
 import toast from 'react-hot-toast';
 import CartContext from '../contexts/CartContext';
 import AuthContext from '../contexts/AuthContext';
+import { normalizeMediaUrl } from '../utils/mediaPath';
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -184,7 +185,7 @@ const Cart = () => {
                             component="img"
                             src={
                               item.images?.[0]
-                                ? `http://localhost:3000${item.images[0]}`
+                                ? normalizeMediaUrl(item.images[0])
                                 : 'https://via.placeholder.com/60?text=Sin+Imagen'
                             }
                             alt={item.name}

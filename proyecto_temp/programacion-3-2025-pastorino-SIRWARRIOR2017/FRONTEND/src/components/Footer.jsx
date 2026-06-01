@@ -11,6 +11,7 @@ import {
   IconButton,
   alpha,
 } from '@mui/material';
+import { normalizeMediaUrl } from '../utils/mediaPath';
 import {
   Mail,
   Phone,
@@ -67,7 +68,7 @@ const Footer = () => {
                 {config.logo ? (
                   <Box
                     component="img"
-                    src={`http://localhost:3000${config.logo}`}
+                    src={normalizeMediaUrl(config.logo)}
                     alt={config.siteName}
                     sx={{
                       height: 48,

@@ -24,8 +24,7 @@ import {
   Users
 } from 'lucide-react';
 import axios from 'axios';
-
-const API_BASE_URL = 'http://localhost:3000/api';
+import { API_BASE_URL } from '../../services/api';
 
 const StatCard = ({ title, value, icon: Icon, color, subtitle }) => (
   <Card>

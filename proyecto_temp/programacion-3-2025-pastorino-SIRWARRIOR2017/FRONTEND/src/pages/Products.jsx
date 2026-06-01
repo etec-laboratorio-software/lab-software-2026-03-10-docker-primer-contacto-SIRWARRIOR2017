@@ -25,6 +25,7 @@ import {
 import { ShoppingCart, Eye, Package } from 'lucide-react';
 import * as api from '../services/api';
 import CartContext from '../contexts/CartContext';
+import { normalizeMediaUrl } from '../utils/mediaPath';
 
 const Products = () => {
   const navigate = useNavigate();
@@ -330,7 +331,7 @@ const Products = () => {
                       component="img"
                       image={
                         product.images?.[0]
-                          ? `http://localhost:3000${product.images[0]}`
+                          ? normalizeMediaUrl(product.images[0])
                           : 'https://via.placeholder.com/300x240?text=PC+Component'
                       }
                       alt={product.name}

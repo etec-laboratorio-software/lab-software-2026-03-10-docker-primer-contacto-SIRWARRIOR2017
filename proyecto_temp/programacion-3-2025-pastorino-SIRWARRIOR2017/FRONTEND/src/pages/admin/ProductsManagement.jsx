@@ -33,8 +33,8 @@ import {
 import { Edit, Trash2, Plus, Save, X } from 'lucide-react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-
-const API_BASE_URL = 'http://localhost:3000/api';
+import { normalizeMediaUrl } from '../../utils/mediaPath';
+import { API_BASE_URL } from '../../services/api';
 
 const ProductsManagement = () => {
   const [products, setProducts] = useState([]);
@@ -154,7 +154,7 @@ const ProductsManagement = () => {
       });
       // Mostrar preview de imagen existente
       if (product.images && product.images.length > 0) {
-        setImagePreview(`http://localhost:3000${product.images[0]}`);
+        setImagePreview(normalizeMediaUrl(product.images[0]));
       } else {
         setImagePreview(null);
       }
@@ -468,7 +468,7 @@ const ProductsManagement = () => {
                   <Box
                     component="img"
                     src={product.images && product.images.length > 0
-                      ? `http://localhost:3000${product.images[0]}`
+                      ? normalizeMediaUrl(product.images[0])
                       : 'https://via.placeholder.com/50?text=Sin+Imagen'}
                     alt={product.name}
                     sx={{ width: 50, height: 50, objectFit: 'cover', borderRadius: 1 }}

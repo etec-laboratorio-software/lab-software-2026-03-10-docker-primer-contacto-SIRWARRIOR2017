@@ -16,6 +16,7 @@ import {
 } from '@mui/material';
 import { ArrowRight, Zap, Shield, Truck, Award, Sparkles, TrendingUp } from 'lucide-react';
 import * as api from '../services/api';
+import { normalizeMediaUrl } from '../utils/mediaPath';
 
 const Home = () => {
   const [categories, setCategories] = useState([]);
@@ -446,7 +447,7 @@ const Home = () => {
                       component="img"
                       image={
                         product.images?.[0]
-                          ? `http://localhost:3000${product.images[0]}`
+                          ? normalizeMediaUrl(product.images[0])
                           : 'https://via.placeholder.com/300x240?text=PC+Component'
                       }
                       alt={product.name}

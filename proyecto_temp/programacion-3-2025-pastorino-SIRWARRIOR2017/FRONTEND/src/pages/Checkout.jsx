@@ -27,7 +27,7 @@ import AuthContext from '../contexts/AuthContext';
 import { validateCardNumber, validateExpiryDate, validateCVV, detectCardType, formatCardNumber } from '../utils/cardValidation';
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:3000/api');
 
 const steps = ['Revisar Orden', 'Información de Envío', 'Método de Pago', 'Confirmar'];
 
@@ -281,7 +281,7 @@ const Checkout = () => {
                     <Avatar
                       src={
                         item.images?.[0]
-                          ? `http://localhost:3000${item.images[0]}`
+                          ? normalizeMediaUrl(item.images[0])
                           : 'https://via.placeholder.com/60?text=Sin+Imagen'
                       }
                       variant="rounded"
