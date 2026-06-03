@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, useEffect, useCallback } from 'react';
 import * as api from '../services/api';
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from 'jwt-decode';
 import toast from 'react-hot-toast';
 
 const AuthContext = createContext();

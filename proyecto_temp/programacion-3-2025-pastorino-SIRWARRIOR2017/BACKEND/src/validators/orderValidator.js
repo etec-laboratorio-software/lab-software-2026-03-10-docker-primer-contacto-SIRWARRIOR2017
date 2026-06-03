@@ -22,7 +22,7 @@ const handleValidationErrors = (req, res, next) => {
 // Solo se valida la dirección si se proporciona (opcional).
 const createOrder = [
   body('address')
-    .optional()
+    .optional({ checkFalsy: true })
     .trim()
     .isLength({ min: 10, max: 500 }).withMessage('La dirección debe tener entre 10 y 500 caracteres')
     .escape(),

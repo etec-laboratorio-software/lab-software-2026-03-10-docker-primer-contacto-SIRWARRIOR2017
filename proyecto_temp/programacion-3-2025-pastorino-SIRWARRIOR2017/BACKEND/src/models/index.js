@@ -10,7 +10,7 @@ const SiteSettings = require('./SiteSettings');
 
 // Definir relaciones
 // User - Order
-User.hasMany(Order, { foreignKey: 'userId' });
+User.hasMany(Order, { foreignKey: 'userId', as: 'orders' });
 Order.belongsTo(User, { foreignKey: 'userId' });
 
 // Order - OrderItem
@@ -34,7 +34,7 @@ Category.hasMany(Product, { foreignKey: 'categoryId' });
 Product.belongsTo(Category, { foreignKey: 'categoryId' });
 
 // User - ServiceRequest
-User.hasMany(ServiceRequest, { foreignKey: 'userId' });
+User.hasMany(ServiceRequest, { foreignKey: 'userId', as: 'serviceRequests' });
 ServiceRequest.belongsTo(User, { foreignKey: 'userId' });
 
 module.exports = {

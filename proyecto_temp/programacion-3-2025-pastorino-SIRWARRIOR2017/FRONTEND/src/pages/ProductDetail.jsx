@@ -19,6 +19,7 @@ import toast from 'react-hot-toast';
 import { getProductById } from '../services/api';
 import CartContext from '../contexts/CartContext';
 import ProductSpecifications from '../components/ProductSpecifications';
+import { normalizeMediaUrl } from '../utils/mediaPath';
 
 const ProductDetail = () => {
   const { id } = useParams();

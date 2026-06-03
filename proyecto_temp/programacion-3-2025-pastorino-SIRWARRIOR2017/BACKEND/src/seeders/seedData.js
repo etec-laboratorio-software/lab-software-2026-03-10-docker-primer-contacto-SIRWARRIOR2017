@@ -9,31 +9,31 @@ const seedDatabase = async () => {
       {
         name: 'Procesadores',
         description: 'CPUs de Intel y AMD para equipos de escritorio y portátiles',
-        image: 'https://example.com/cpu.jpg',
+        image: '/uploads/products/Sin_titulo-1763044295305-852818271.jpg',
         isActive: true
       },
       {
         name: 'Tarjetas Gráficas',
         description: 'GPUs NVIDIA y AMD para gaming y workstations',
-        image: 'https://example.com/gpu.jpg',
+        image: '/uploads/products/x1-301-jpg-1761844706591-335621029.webp',
         isActive: true
       },
       {
         name: 'Memoria RAM',
         description: 'Módulos de memoria DDR4 y DDR5',
-        image: 'https://example.com/ram.jpg',
+        image: '/uploads/products/images-1763044243485-219560005.jpg',
         isActive: true
       },
       {
         name: 'Almacenamiento',
         description: 'SSDs NVMe, SATA y discos duros',
-        image: 'https://example.com/storage.jpg',
+        image: '/uploads/products/images-1763044181331-126168710.jpg',
         isActive: true
       },
       {
         name: 'Placas Madre',
         description: 'Motherboards para Intel y AMD',
-        image: 'https://example.com/motherboard.jpg',
+        image: '/uploads/products/D_NQ_NP_761150-MLU74431289807_022024-O-1763044159374-797189564.webp',
         isActive: true
       }
     ]);
@@ -59,7 +59,7 @@ const seedDatabase = async () => {
           socket: 'LGA 1700',
           tdp: '125W'
         },
-        images: ['https://example.com/i9-13900k-1.jpg'],
+        images: ['/uploads/products/Sin_titulo-1763044295305-852818271.jpg'],
         isActive: true
       },
       {
@@ -78,7 +78,7 @@ const seedDatabase = async () => {
           socket: 'AM5',
           tdp: '170W'
         },
-        images: ['https://example.com/ryzen-9-7950x-1.jpg'],
+        images: ['/uploads/products/images-1763044243485-219560005.jpg'],
         isActive: true
       },
       // Tarjetas Gráficas
@@ -97,7 +97,7 @@ const seedDatabase = async () => {
           powerConsumption: '450W',
           outputs: ['HDMI 2.1', 'DisplayPort 1.4a']
         },
-        images: ['https://example.com/rtx-4090-1.jpg'],
+        images: ['/uploads/products/x1-301-jpg-1761844706591-335621029.webp'],
         isActive: true
       },
       {
@@ -115,7 +115,7 @@ const seedDatabase = async () => {
           powerConsumption: '355W',
           outputs: ['HDMI 2.1', 'DisplayPort 2.1']
         },
-        images: ['https://example.com/rx-7900-xtx-1.jpg'],
+        images: ['/uploads/products/images-1763044211800-785424488.jpg'],
         isActive: true
       },
       // Memoria RAM
@@ -135,7 +135,7 @@ const seedDatabase = async () => {
           voltage: '1.35V',
           rgb: true
         },
-        images: ['https://example.com/corsair-ddr5-1.jpg'],
+        images: ['/uploads/products/images-1763044181331-126168710.jpg'],
         isActive: true
       },
       {
@@ -154,7 +154,7 @@ const seedDatabase = async () => {
           voltage: '1.4V',
           rgb: true
         },
-        images: ['https://example.com/gskill-z5-1.jpg'],
+        images: ['/uploads/products/Sin_titulo-1763044090567-223542333.jpg'],
         isActive: true
       },
       // Almacenamiento
@@ -174,7 +174,7 @@ const seedDatabase = async () => {
           writeSpeed: '6900 MB/s',
           warranty: '5 años'
         },
-        images: ['https://example.com/samsung-990-pro-1.jpg'],
+        images: ['/uploads/products/images-1763044181331-126168710.jpg'],
         isActive: true
       },
       {
@@ -193,7 +193,7 @@ const seedDatabase = async () => {
           writeSpeed: '6300 MB/s',
           warranty: '5 años'
         },
-        images: ['https://example.com/wd-sn850x-1.jpg'],
+        images: ['/uploads/products/images-1763044243485-219560005.jpg'],
         isActive: true
       },
       // Placas Madre
@@ -216,7 +216,7 @@ const seedDatabase = async () => {
           ethernet: '2.5Gb LAN',
           wifi: 'Wi-Fi 6E'
         },
-        images: ['https://example.com/asus-z790-1.jpg'],
+        images: ['/uploads/products/D_NQ_NP_761150-MLU74431289807_022024-O-1763044159374-797189564.webp'],
         isActive: true
       },
       {
@@ -238,7 +238,7 @@ const seedDatabase = async () => {
           ethernet: '2.5Gb LAN',
           wifi: 'Wi-Fi 6E'
         },
-        images: ['https://example.com/msi-x670e-1.jpg'],
+        images: ['/uploads/products/D_Q_NP_624515-CBT72015795264_102023-O-1763044132784-207765084.webp'],
         isActive: true
       }
     ]);

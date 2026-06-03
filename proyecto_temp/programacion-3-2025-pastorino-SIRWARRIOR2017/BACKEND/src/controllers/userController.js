@@ -24,6 +24,47 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+// Obtener perfil del usuario autenticado
+const getMyProfile = async (req, res) => {
+  try {
+    const user = await User.findByPk(req.user.id, {
+      attributes: {
+        exclude: ['password', 'verificationToken', 'verificationTokenExpires']
+      },
+      include: [
+        {
+          model: Order,
+          as: 'orders',
+          attributes: ['id', 'total', 'status', 'createdAt']
+        },
+        {
+          model: ServiceRequest,
+          as: 'serviceRequests',
+          attributes: ['id', 'status', 'issueDescription', 'createdAt']
+        }
+      ]
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    const stats = {
+      totalOrders: user.orders?.length || 0,
+      totalSpent: user.orders?.reduce((sum, order) => sum + parseFloat(order.total), 0) || 0,
+      totalServiceRequests: user.serviceRequests?.length || 0
+    };
+
+    res.json({ user, stats });
+  } catch (error) {
+    logger.error('Error al obtener perfil:', error);
+    res.status(500).json({
+      message: 'Error al obtener perfil',
+      error: error.message
+    });
+  }
+};
+
 // Obtener un usuario por ID con estadísticas
 const getUserById = async (req, res) => {
   try {
@@ -37,7 +78,7 @@ const getUserById = async (req, res) => {
         {
           model: Order,
           as: 'orders',
-          attributes: ['id', 'totalAmount', 'status', 'createdAt']
+          attributes: ['id', 'total', 'status', 'createdAt']
         },
         {
           model: ServiceRequest,
@@ -54,7 +95,7 @@ const getUserById = async (req, res) => {
     // Calcular estadísticas
     const stats = {
       totalOrders: user.orders?.length || 0,
-      totalSpent: user.orders?.reduce((sum, order) => sum + parseFloat(order.totalAmount), 0) || 0,
+      totalSpent: user.orders?.reduce((sum, order) => sum + parseFloat(order.total), 0) || 0,
       totalServiceRequests: user.serviceRequests?.length || 0
     };
 
@@ -287,6 +328,7 @@ const updateUser = async (req, res) => {
 };
 
 module.exports = {
+  getMyProfile,
   getAllUsers,
   getUserById,
   updateUser,

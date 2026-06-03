@@ -5,6 +5,10 @@ const { authenticateToken, requireAdmin } = require('../middleware/authMiddlewar
 
 // Todas las rutas requieren autenticación y permisos de admin
 router.use(authenticateToken);
+
+// Obtener perfil del usuario autenticado (sin requerir admin)
+router.get('/me', userController.getMyProfile);
+
 router.use(requireAdmin);
 
 // Obtener todos los usuarios

@@ -24,7 +24,7 @@ import { CheckCircle, ArrowLeft, ShoppingBag } from 'lucide-react';
 import toast from 'react-hot-toast';
 import CartContext from '../contexts/CartContext';
 import AuthContext from '../contexts/AuthContext';
-import { validateCardNumber, validateExpiryDate, validateCVV, detectCardType, formatCardNumber } from '../utils/cardValidation';
+import { normalizeMediaUrl } from '../utils/mediaPath';
 import axios from 'axios';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:3000/api');

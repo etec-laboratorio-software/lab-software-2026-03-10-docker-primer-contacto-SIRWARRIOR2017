@@ -306,8 +306,9 @@ const Home = () => {
                     <CardMedia
                       component="img"
                       height="220"
-                      image={cat.image}
+                      image={normalizeMediaUrl(cat.image)}
                       alt={cat.name}
+                      onError={(event) => { event.target.src = 'https://via.placeholder.com/360x220?text=Sin+imagen'; }}
                       sx={{ objectFit: 'cover' }}
                     />
                   )}
@@ -451,6 +452,7 @@ const Home = () => {
                           : 'https://via.placeholder.com/300x240?text=PC+Component'
                       }
                       alt={product.name}
+                      onError={(event) => { event.target.src = 'https://via.placeholder.com/300x240?text=PC+Component'; }}
                       sx={{
                         width: '100%',
                         height: '100%',
