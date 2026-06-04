@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  # Backend: API REST con Node.js + Express (sin exponer puerto)
+  backend:
+    build: ./BACKEND
+    container_name: pc-store-backend
+    volumes:
+      - ./BACKEND/database:/app/database
+      - ./BACKEND/public/uploads:/app/public/uploads
+    environment:
+      - NODE_ENV=production
+      - JWT_SECRET=0c881cb890a1cdb2bc7d1981bb94de80400a850350a24eb5f95636b32b1e0cc024bed561ce3266b0a5317de5d042136949291b244fb729241ae09ab291d0e32b
+      - PORT=3000
+      - FRONTEND_URL=http://localhost
+      - LOG_LEVEL=info
+    networks:
+      - pcstore-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # Frontend: Aplicación React servida por Nginx (solo expone puerto 80)
+  frontend:
+    build: ./FRONTEND
+    container_name: pc-store-frontend
+    ports:
+      - "80:80"
+    volumes:
+      - ./FRONTEND/.env:/app/.env:ro
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - pcstore-network
+
+networks:
+  pcstore-network:
+    driver: bridge
